@@ -196,6 +196,11 @@ I pingged google.com to make sure the VM is connected to the internet:
 
 The Ping was successful. This means that connectivity to the default gateway (domain controller) is working, and domain controller is successfully natting it and forwarding it out to the internet. Then, it is able to ping back to the Client1 (Windows 10 VM). 
 
+Diagram:
+
+![ping](https://user-images.githubusercontent.com/121040101/223159736-daf47e30-4c0c-40de-b241-3e784306523d.PNG)
+
+
 Mydomian.com works too:
 ![38](https://user-images.githubusercontent.com/121040101/223154849-a1781fd5-479c-4f2f-8ee4-89439aa2f505.png)
 

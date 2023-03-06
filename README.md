@@ -212,3 +212,26 @@ After changing to name and joining the domain, it asks you to login. I can login
 Once successfully login, it will restart:
 ![41](https://user-images.githubusercontent.com/121040101/223156801-9fa5f002-6e6c-4764-8cf6-fbe2758cabf2.png)
 
+If I go back to domain controller (Server 2019 VM), go to "DHCP", "address lease", I can see the Windows 10 VM. Once logged in to the mydomain.com, the DHCP server automatically assigned an IP address:
+
+![42](https://user-images.githubusercontent.com/121040101/223157404-afd697a1-f056-4a19-ba8b-5575937d3e07.png)
+
+If I go to active directory users and computers, in the mydomain.com, computers, the “CLIENT1” is member of the domain because I was able to join the domain. 
+
+With “CLIENT1” I can log in with any of 1000 user accounts. But if I delete “CLIENT1” I would not be able to login with that device. 
+
+![43](https://user-images.githubusercontent.com/121040101/223157735-7b7391ee-0a0f-456b-8bbd-81487d1e08a9.png)
+
+
+# Check if I am in the Domain
+If I go to windows 10 VM and select login as other user. It said “sign in to: MYDOMAIN” 
+
+![44](https://user-images.githubusercontent.com/121040101/223157798-82efd4b1-9b17-44b4-8ecd-12daca927f66.png)
+
+This means that I have successfully joined the domain. 
+
+I can double check by going to Command Prompt and type "whoami":
+![45](https://user-images.githubusercontent.com/121040101/223158373-dc0759b7-a40f-4836-a0e1-56e7686da774.png)
+
+
+This concludes the lab.

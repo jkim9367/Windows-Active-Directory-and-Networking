@@ -135,4 +135,80 @@ Next, I am going to set up DHCP server on the domain controller to allow windows
 
 Go to add roles and features 
 
-Select DHCP server 
+Select DHCP server:
+
+![25](https://user-images.githubusercontent.com/121040101/223151684-1b5ac96e-60ee-479c-919d-502cfe838e03.png)
+
+Go to “tools”, “DHCP”, extend “dc.mydomain.com”, right click “IPv4”, click “new scoop”. 
+
+I named the scope name as my IP address range which is “172.16.0.100-200”: 
+
+![26](https://user-images.githubusercontent.com/121040101/223151846-bb4d6062-f335-4c14-9d97-8cc1915175e1.png)
+
+I set my IP address range like this: 
+![27](https://user-images.githubusercontent.com/121040101/223151917-f3258db4-e00e-48b8-b663-5e2a2e6ea136.png)
+
+For the router (default gateway)
+
+This forward traffic from the client to the internet. So, I put domain controller’s IP address. 
+
+![28](https://user-images.githubusercontent.com/121040101/223152133-5734db36-f073-4af6-9d13-165ec1a4b91e.png)
+
+Next, right click “dc.mydomain.com”, click “authorize” and right click again and refresh. 
+
+Now I can see IPv4 and IPv6 have turned green and it's working:
+
+![29](https://user-images.githubusercontent.com/121040101/223152216-2bd8d920-ee36-424a-9d18-890e345ed825.png)
+
+# Using PowerShell script to create 1,000 users in the Active Directory
+
+Now I am going to use PowerShell script to create Windows 10 client users in the Active Directory instead of doing it manually.
+
+I downloaded my “1_CREATE_USERS.ps1” and "names.txt" files on the desktop
+
+I opened "Windows PowerShell ISE" as an administrator and open the script, “1_CREATE_USERS.ps1”:
+![30](https://user-images.githubusercontent.com/121040101/223152611-6c37c414-665e-403b-98c4-8ea7075b6912.png)
+
+On command line, put “Set-ExecutionPolicy unrestricted” and click “yes to all”: 
+![31](https://user-images.githubusercontent.com/121040101/223152781-62ccb9ef-0c7e-4d68-a749-096e40e1d982.png)
+
+Run the script:
+![32](https://user-images.githubusercontent.com/121040101/223153852-40a42e5a-333a-4abb-8c03-8f992fa47d1c.png)
+
+Through this script, I automatically created a group called “_USERS” and inside of this group, there are 1000 users' accounts:
+![33](https://user-images.githubusercontent.com/121040101/223153943-458a44f2-e93d-405b-9520-b597bee7d305.png)
+
+# Create Wundows 10 VM and login as one of the users.
+
+When creating a new VM, I selected the internal network for the network:
+![34](https://user-images.githubusercontent.com/121040101/223154333-ddfab671-576b-4fd8-b16e-08c67c914fd1.png)
+
+Make sure to select windows 10 pro. This allows you to join the internal network. 
+![35](https://user-images.githubusercontent.com/121040101/223154382-948e7ac3-dc88-4aef-9173-be5fc12fec17.png)
+
+# Checking if Windows 10 VM has connected to internal network
+
+On the windows 10 VM, go to command prompt. Type “ipconfig” to make sure the windows 10 VM have default gateway and network is connected
+![36](https://user-images.githubusercontent.com/121040101/223154667-7b489224-9882-486e-aec9-797bad86c68b.png)
+
+I pingged google.com to make sure the VM is connected to the internet:
+![37](https://user-images.githubusercontent.com/121040101/223154780-12ae80bc-b25f-474b-854d-eb54217423da.png)
+
+The Ping was successful. This means that connectivity to the default gateway (domain controller) is working, and domain controller is successfully natting it and forwarding it out to the internet. Then, it is able to ping back to the Client1 (Windows 10 VM). 
+
+Mydomian.com works too:
+![38](https://user-images.githubusercontent.com/121040101/223154849-a1781fd5-479c-4f2f-8ee4-89439aa2f505.png)
+
+# Joining the domain (mydomain.com)
+
+I am going to change the name of the device and join the domain (mydomain.com): 
+
+![39](https://user-images.githubusercontent.com/121040101/223156429-7d6e8b7b-3efe-4697-b3a6-e7115506d1f1.png)
+
+After changing to name and joining the domain, it asks you to login. I can login as any account within the active directory, which I created with the PowerShell script. 
+
+![40](https://user-images.githubusercontent.com/121040101/223156717-fdbf7e13-54de-4117-9f1f-fc663079f5ef.png)
+
+Once successfully login, it will restart:
+![41](https://user-images.githubusercontent.com/121040101/223156801-9fa5f002-6e6c-4764-8cf6-fbe2758cabf2.png)
+

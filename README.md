@@ -2,7 +2,9 @@
 
 Summary:  
 
-Created the first domain machine on VM. Which will be my domain controller – housing active directory. I gave 2 NIC to this VM. One for connecting to the internet and the other one connected to the VM private network that clients are going to connect to. Then I will install server 2019 on it then assign IP address for the internal network. (External networks automatically have IP address from local network). 
+By using Virtual Machine, I created a domain controller and gave 2 NIC that connects to the internet and internal network. After, I installed active directory, created domain, configure NAT and routing. Using PowerShell script, I created 1000 clients in the active directory to simulate corporate environment. These clients was able access private network by setting up DHCP and login in to the the domain.
+
+So, in this lab, I created the first domain machine on VM. Which will be my domain controller – housing active directory. I gave 2 NIC to this VM. One for connecting to the internet and the other one connected to the VM private network that clients are going to connect to. Then I will install server 2019 on it then assign IP address for the internal network. (External networks automatically have IP address from local network). 
 
 After, I named the server, installed active directory, created a domain, configure NAT and routing, so client on private network can access the internet through the domain controller, I also setup DHCP on domain controller so when Windows 10 VM is created and login as one of the clients, it will automatically be assigned with an IP address. 
 
